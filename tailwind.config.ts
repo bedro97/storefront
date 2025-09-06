@@ -1,11 +1,160 @@
-import TypographyPlugin from "@tailwindcss/typography";
-import FormPlugin from "@tailwindcss/forms";
-import ContainerQueriesPlugin from "@tailwindcss/container-queries";
-import { type Config } from "tailwindcss";
+import type { Config } from "tailwindcss";
 
-const config: Config = {
-	content: ["./src/**/*.{ts,tsx}"],
-	plugins: [TypographyPlugin, FormPlugin, ContainerQueriesPlugin],
-};
-
-export default config;
+export default {
+	darkMode: ["class"],
+	content: [
+		"./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+		"./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+		"./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+		"./src/ui/**/*.{js,ts,jsx,tsx,mdx}",
+		"./src/checkout/**/*.{js,ts,jsx,tsx,mdx}",
+	],
+	theme: {
+		extend: {
+			colors: {
+				// XYHARMONEY Custom Color Palette
+				xy: {
+					primary: {
+						50: "rgb(var(--xy-primary-50))",
+						100: "rgb(var(--xy-primary-100))",
+						200: "rgb(var(--xy-primary-200))",
+						300: "rgb(var(--xy-primary-300))",
+						400: "rgb(var(--xy-primary-400))",
+						500: "rgb(var(--xy-primary-500))",
+						600: "rgb(var(--xy-primary-600))",
+						700: "rgb(var(--xy-primary-700))",
+						800: "rgb(var(--xy-primary-800))",
+						900: "rgb(var(--xy-primary-900))",
+						950: "rgb(var(--xy-primary-950))",
+					},
+					secondary: {
+						50: "rgb(var(--xy-secondary-50))",
+						100: "rgb(var(--xy-secondary-100))",
+						200: "rgb(var(--xy-secondary-200))",
+						300: "rgb(var(--xy-secondary-300))",
+						400: "rgb(var(--xy-secondary-400))",
+						500: "rgb(var(--xy-secondary-500))",
+						600: "rgb(var(--xy-secondary-600))",
+						700: "rgb(var(--xy-secondary-700))",
+						800: "rgb(var(--xy-secondary-800))",
+						900: "rgb(var(--xy-secondary-900))",
+						950: "rgb(var(--xy-secondary-950))",
+					},
+					accent: {
+						50: "rgb(var(--xy-accent-50))",
+						100: "rgb(var(--xy-accent-100))",
+						200: "rgb(var(--xy-accent-200))",
+						300: "rgb(var(--xy-accent-300))",
+						400: "rgb(var(--xy-accent-400))",
+						500: "rgb(var(--xy-accent-500))",
+						600: "rgb(var(--xy-accent-600))",
+						700: "rgb(var(--xy-accent-700))",
+						800: "rgb(var(--xy-accent-800))",
+						900: "rgb(var(--xy-accent-900))",
+						950: "rgb(var(--xy-accent-950))",
+					},
+					neutral: {
+						50: "rgb(var(--xy-neutral-50))",
+						100: "rgb(var(--xy-neutral-100))",
+						200: "rgb(var(--xy-neutral-200))",
+						300: "rgb(var(--xy-neutral-300))",
+						400: "rgb(var(--xy-neutral-400))",
+						500: "rgb(var(--xy-neutral-500))",
+						600: "rgb(var(--xy-neutral-600))",
+						700: "rgb(var(--xy-neutral-700))",
+						800: "rgb(var(--xy-neutral-800))",
+						900: "rgb(var(--xy-neutral-900))",
+						950: "rgb(var(--xy-neutral-950))",
+					},
+					success: {
+						50: "rgb(var(--xy-success-50))",
+						500: "rgb(var(--xy-success-500))",
+						600: "rgb(var(--xy-success-600))",
+						700: "rgb(var(--xy-success-700))",
+					},
+					warning: {
+						50: "rgb(var(--xy-warning-50))",
+						500: "rgb(var(--xy-warning-500))",
+						600: "rgb(var(--xy-warning-600))",
+						700: "rgb(var(--xy-warning-700))",
+					},
+					error: {
+						50: "rgb(var(--xy-error-50))",
+						500: "rgb(var(--xy-error-500))",
+						600: "rgb(var(--xy-error-600))",
+						700: "rgb(var(--xy-error-700))",
+					},
+				},
+				border: "hsl(var(--border))",
+				input: "hsl(var(--input))",
+				ring: "hsl(var(--ring))",
+				background: "hsl(var(--background))",
+				foreground: "hsl(var(--foreground))",
+				primary: {
+					DEFAULT: "hsl(var(--primary))",
+					foreground: "hsl(var(--primary-foreground))",
+				},
+				secondary: {
+					DEFAULT: "hsl(var(--secondary))",
+					foreground: "hsl(var(--secondary-foreground))",
+				},
+				destructive: {
+					DEFAULT: "hsl(var(--destructive))",
+					foreground: "hsl(var(--destructive-foreground))",
+				},
+				muted: {
+					DEFAULT: "hsl(var(--muted))",
+					foreground: "hsl(var(--muted-foreground))",
+				},
+				accent: {
+					DEFAULT: "hsl(var(--accent))",
+					foreground: "hsl(var(--accent-foreground))",
+				},
+				popover: {
+					DEFAULT: "hsl(var(--popover))",
+					foreground: "hsl(var(--popover-foreground))",
+				},
+				card: {
+					DEFAULT: "hsl(var(--card))",
+					foreground: "hsl(var(--card-foreground))",
+				},
+			},
+			borderRadius: {
+				lg: "var(--radius)",
+				md: "calc(var(--radius) - 2px)",
+				sm: "calc(var(--radius) - 4px)",
+			},
+			fontFamily: {
+				sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+			},
+			spacing: {
+				xs: "var(--xy-spacing-xs)",
+				sm: "var(--xy-spacing-sm)",
+				md: "var(--xy-spacing-md)",
+				lg: "var(--xy-spacing-lg)",
+				xl: "var(--xy-spacing-xl)",
+				"2xl": "var(--xy-spacing-2xl)",
+				"3xl": "var(--xy-spacing-3xl)",
+			},
+			fontSize: {
+				xs: "var(--xy-font-size-xs)",
+				sm: "var(--xy-font-size-sm)",
+				base: "var(--xy-font-size-base)",
+				lg: "var(--xy-font-size-lg)",
+				xl: "var(--xy-font-size-xl)",
+				"2xl": "var(--xy-font-size-2xl)",
+				"3xl": "var(--xy-font-size-3xl)",
+				"4xl": "var(--xy-font-size-4xl)",
+				"5xl": "var(--xy-font-size-5xl)",
+				"6xl": "var(--xy-font-size-6xl)",
+			},
+			boxShadow: {
+				sm: "var(--xy-shadow-sm)",
+				md: "var(--xy-shadow-md)",
+				lg: "var(--xy-shadow-lg)",
+				xl: "var(--xy-shadow-xl)",
+			},
+		},
+	},
+	plugins: [],
+} satisfies Config;

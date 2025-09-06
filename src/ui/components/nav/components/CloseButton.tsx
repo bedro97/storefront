@@ -10,14 +10,13 @@ export const CloseButton = (props: Props) => {
 	return (
 		<button
 			className={clsx(
-				"top-0 ml-auto flex h-8 w-8 flex-col items-center justify-center gap-1.5 self-end self-center md:hidden",
+				"flex h-10 w-10 items-center justify-center rounded-full bg-xy-neutral-100 transition-colors hover:bg-xy-neutral-200",
 			)}
 			aria-controls={props["aria-controls"]}
-			aria-expanded={true}
 			aria-label="Close menu"
 			onClick={props.onClick}
 		>
-			<XIcon className="h-6 w-6 shrink-0" aria-hidden />
+			<XIcon className="h-5 w-5 text-xy-neutral-600" aria-hidden />
 		</button>
 	);
 };
