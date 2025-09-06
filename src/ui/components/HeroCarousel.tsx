@@ -24,9 +24,10 @@ const heroSlides: HeroSlide[] = [
 	{
 		id: "1",
 		image: "/cosmetics.gif",
-		headline: "Welcome to XY Beauty",
-		subheading: "Discover premium cosmetics and skincare products",
-		ctaText: "Shop Now",
+		headline: "Elevate Your Beauty Experience",
+		subheading:
+			"Curated collection of premium cosmetics and skincare essentials for the modern beauty enthusiast",
+		ctaText: "Discover Products",
 		ctaLink: "/products",
 		activeDates: {
 			start: "2024-01-01",
@@ -131,18 +132,35 @@ export function HeroCarousel() {
 					>
 						<div className={`max-w-4xl px-4 text-center text-white`}>
 							{currentSlideData.headline && (
-								<h1 className="mb-4 text-4xl font-bold drop-shadow-lg md:text-5xl lg:text-6xl">
+								<h1
+									className={`mb-6 font-bold drop-shadow-lg md:text-5xl lg:text-6xl ${
+										currentSlide === 0
+											? "bg-gradient-to-r from-xy-neutral-100 via-white to-xy-neutral-100 bg-clip-text text-4xl tracking-wide text-transparent"
+											: "text-4xl"
+									}`}
+								>
 									{currentSlideData.headline}
 								</h1>
 							)}
 							{currentSlideData.subheading && (
-								<p className="mb-8 text-lg drop-shadow-md md:text-xl lg:text-2xl">
+								<p
+									className={`mb-8 drop-shadow-md md:text-xl lg:text-2xl ${
+										currentSlide === 0 ? "text-lg leading-relaxed text-xy-neutral-200" : "text-lg"
+									}`}
+								>
 									{currentSlideData.subheading}
 								</p>
 							)}
 							{currentSlideData.ctaText && currentSlideData.ctaLink && (
 								<Link href={currentSlideData.ctaLink}>
-									<Button className="xy-button-primary px-8 py-4 text-lg" label={currentSlideData.ctaText} />
+									<Button
+										className={`px-8 py-4 text-lg ${
+											currentSlide === 0
+												? "xy-button-primary transform bg-gradient-to-r from-xy-primary-600 to-xy-primary-700 shadow-lg transition-all duration-300 hover:scale-105 hover:from-xy-primary-700 hover:to-xy-primary-800 hover:shadow-xl"
+												: "xy-button-primary"
+										}`}
+										label={currentSlideData.ctaText}
+									/>
 								</Link>
 							)}
 						</div>

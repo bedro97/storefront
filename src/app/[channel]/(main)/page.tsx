@@ -6,7 +6,8 @@ import { FlashSale } from "@/ui/components/FlashSale";
 import { ProductList } from "@/ui/components/ProductList";
 import { PromotionalBanner } from "@/ui/components/PromotionalBanner";
 import { executeGraphQL } from "@/lib/graphql";
-import { ProductListDocument } from "@/gql/graphql";
+import { ProductListDocument, CategoryListForMarqueeDocument } from "@/gql/graphql";
+import { CategoryMarqueeSection } from "@/components/CategoryMarqueeSectionWrapper";
 
 export default async function HomePage({ params }: { params: Promise<{ channel: string }> }) {
 	// Ensure params are properly awaited
@@ -35,13 +36,21 @@ export default async function HomePage({ params }: { params: Promise<{ channel: 
 	try {
 		console.log("Executing GraphQL with variables:", { channel, first: 20 });
 
-		const products = await executeGraphQL(ProductListDocument, {
-			variables: { channel: channel, first: 20 },
-			revalidate: 60 * 60 * 24,
-		});
+		// Fetch products and categories in parallel
+		const [products, categories] = await Promise.all([
+			executeGraphQL(ProductListDocument, {
+				variables: { channel: channel, first: 20 },
+				revalidate: 60 * 60 * 24,
+			}),
+			executeGraphQL(CategoryListForMarqueeDocument, {
+				variables: { first: 50 },
+				revalidate: 60 * 60 * 24,
+			}),
+		]);
 
 		console.log("GraphQL Response:", JSON.stringify(products, null, 2));
 		console.log("Products count:", products.products?.edges?.length || 0);
+		console.log("Categories count:", categories.categories?.edges?.length || 0);
 
 		return (
 			<div className="min-h-screen">
@@ -50,6 +59,29 @@ export default async function HomePage({ params }: { params: Promise<{ channel: 
 
 				{/* Hero Carousel */}
 				<HeroCarousel />
+
+				{/* Category Marquee Section */}
+				<CategoryMarqueeSection
+					channel={channel}
+					categories={categories.categories?.edges?.map((edge) => edge.node) ?? []}
+					headline="The best categories, zero guesswork."
+					subhead="Hand-picked collections with instant delivery."
+					bullets={[
+						"Curated categories designed to convert",
+						"Transparent pricing, no surprises",
+						"Fast support if you ever need help",
+					]}
+					primaryCta={{ label: "Start shopping", href: `/categories` }}
+					secondaryCta={{ label: "See bundles", href: `/collections/bundles` }}
+					proofLogos={[
+						{ src: "/logos/visa.svg", alt: "Visa" },
+						{ src: "/logos/mastercard.svg", alt: "Mastercard" },
+					]}
+					testimonial={{ quote: "The fastest checkout I've used.", author: "Sarah M." }}
+					riskReversal="14-day money-back guarantee."
+					urgencyNote="New stock weekly — popular categories sell out."
+					marqueeSpeedSeconds={28}
+				/>
 
 				{/* Featured Products */}
 				<section className="xy-section bg-white">
