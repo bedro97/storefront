@@ -119,7 +119,7 @@ export function CategoryMarqueeSection({
 					</div>
 				</div>
 
-				{/* RIGHT: Dual Vertical marquees */}
+				{/* RIGHT: Dual Vertical marquees - Hidden on mobile */}
 				<div className={styles.dualMarqueeContainer}>
 					{/* First Marquee */}
 					<div className={styles.marqueeShell} style={{ ["--speed" as any]: `${marqueeSpeedSeconds}s` }}>
@@ -204,6 +204,33 @@ export function CategoryMarqueeSection({
 							))}
 						</div>
 					</div>
+				</div>
+
+				{/* Mobile: Simple category grid - Visible only on mobile */}
+				<div className={styles.mobileCategoryGrid}>
+					{categories.map((c, idx) => (
+						<Link
+							key={`mobile-${c?.id}-${idx}`}
+							href={`/categories/${c?.slug}`}
+							className={styles.mobileCategoryCard}
+						>
+							<div className={styles.mobileImageContainer}>
+								{c?.backgroundImage?.url ? (
+									<Image
+										src={c.backgroundImage.url}
+										alt={c.backgroundImage.alt || c.name}
+										fill
+										className={styles.mobileCategoryImage}
+									/>
+								) : (
+									<div className={styles.mobilePlaceholderImage}>
+										<span className={styles.mobilePlaceholderText}>{c?.name?.charAt(0) || "📦"}</span>
+									</div>
+								)}
+							</div>
+							<span className={styles.mobileCategoryName}>{c?.name}</span>
+						</Link>
+					))}
 				</div>
 			</div>
 		</section>

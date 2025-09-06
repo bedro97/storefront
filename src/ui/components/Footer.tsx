@@ -2,14 +2,15 @@ import Link from "next/link";
 import { Facebook, Instagram, Twitter, Youtube, Mail, Phone, MapPin, Heart } from "lucide-react";
 import { ChannelSelect } from "./ChannelSelect";
 import { Logo } from "./Logo";
-import { ChannelsListDocument, MenuGetBySlugDocument } from "@/gql/graphql";
+import { ChannelsListDocument } from "@/gql/graphql";
 import { executeGraphQL } from "@/lib/graphql";
 
-export async function Footer({ channel }: { channel: string }) {
-	const _footerLinks = await executeGraphQL(MenuGetBySlugDocument, {
-		variables: { slug: "footer", channel },
-		revalidate: 60 * 60 * 24,
-	});
+export async function Footer() {
+	// Note: Footer links are currently hardcoded, but this can be used for dynamic menu loading
+	// const footerLinks = await executeGraphQL(MenuGetBySlugDocument, {
+	// 	variables: { slug: "footer", channel },
+	// 	revalidate: 60 * 60 * 24,
+	// });
 	const channels = process.env.SALEOR_APP_TOKEN
 		? await executeGraphQL(ChannelsListDocument, {
 				withAuth: false, // disable cookie-based auth for this call

@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import { UserMenuContainer } from "./components/UserMenu/UserMenuContainer";
 import { CartNavItem } from "./components/CartNavItem";
 import { NavLinks } from "./components/NavLinks";
-import { MobileMenu } from "./components/MobileMenu";
 import { SearchBar } from "./components/SearchBar";
 
 export const Nav = ({ channel }: { channel: string }) => {
@@ -24,12 +23,6 @@ export const Nav = ({ channel }: { channel: string }) => {
 					<CartNavItem channel={channel} />
 				</Suspense>
 			</div>
-			<Suspense>
-				<MobileMenu>
-					<SearchBar channel={channel} />
-					<NavLinks channel={channel} />
-				</MobileMenu>
-			</Suspense>
 		</nav>
 	);
 };
